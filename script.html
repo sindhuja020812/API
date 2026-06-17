@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FakeStore Product By ID</title>
+</head>
+
+<body>
+
+    <h2>Get Product By ID</h2>
+
+    <input type="number" id="productId" placeholder="Enter Product ID">
+
+    <button onclick="getProduct()">Search</button>
+
+    <div id="product"></div>
+
+<script>
+
+function getProduct() {
+
+    let id = document.getElementById("productId").value;
+
+    fetch(`https://fakestoreapi.com/products/${id}`)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        document.getElementById("product").innerHTML = `
+
+            <p><b>ID:</b> ${data.id}</p>
+
+            <p><b>Title:</b> ${data.title}</p>
+
+            <p><b>Price:</b> $${data.price}</p>
+
+            <p><b>Category:</b> ${data.category}</p>
+
+            <p><b>Description:</b> ${data.description}</p>
+
+        `;
+
+    })
+
+    .catch(error => {
+
+        document.getElementById("product").innerHTML =
+        "Product not found";
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
